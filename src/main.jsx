@@ -11,6 +11,7 @@ import {
   replayNew,
 } from './game/game.js'
 import { pokemons as initialPokemons } from './data/dummy.js'
+import { fetchAllPokemon } from './game/api.js'
 
 // just for testing on devtool console
 Object.assign(window, {
@@ -20,6 +21,7 @@ Object.assign(window, {
   replaySame,
   replayNew,
   initialPokemons,
+  fetchAllPokemon,
 })
 
 createRoot(document.getElementById('root')).render(
