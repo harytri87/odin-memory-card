@@ -40,3 +40,140 @@ p {
 h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
 }
+
+#root, #__next {
+  isolation: isolate;
+}
+
+/* ---------- Base ---------- */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* ---------- General ---------- */
+.app {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 90rem;
+  padding: 1.25rem clamp(1rem, 4vw, 3rem);
+
+  & .status {
+    text-align: center;
+  }
+}
+
+/* ---------- Game Section ---------- */
+.game {
+  display: grid;
+  justify-items: center;
+  gap: 1.5rem;
+
+  & .scoreboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 2.5rem;
+    font-size: 1.25rem;
+  }
+
+  & .start {
+    min-height: 3rem;
+    padding: 0 2.5rem;
+    font-size: 1.25rem;
+  }
+}
+
+/* ---------- Card ---------- */
+.card-list {
+  container: cards / inline-size;
+  width: 100%;
+
+  & ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  & .front{
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    align-content: start;
+    gap: 0.25rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  & img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
+  }
+
+  & .name {
+    min-height: 1lh;
+    font-size: 0.875rem;
+    overflow-wrap: anywhere;
+    text-transform: capitalize;
+  }
+
+  & .pool {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.5rem;
+
+    @container cards (width >= 36rem) {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    @container cards (width >= 56rem) {
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+    }
+  }
+
+  & .hand {
+    --per-row: 3;
+    --gap: 1rem;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--gap);
+
+    @container cards (width >= 40rem) {
+      --per-row: 5;
+    }
+
+    & li {
+      flex: 0 0 calc((100% - (var(--per-row) - 1) * var(--gap)) / var(--per-row));
+    }
+
+    & .front {
+      padding: 0.5rem;
+    }
+
+    @container cards (width >= 40rem) {
+      & .name {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+/* ---------- Game Over ---------- */
+.game-over {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+
+  & .result {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  & .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+  }
+}

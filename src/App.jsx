@@ -27,13 +27,20 @@ export default function App() {
     }
   }, [])
 
+  let content
   if (result.status === 'loading') {
-    return <p>Loading...</p>
+    content = <p className="status">Loading...</p>
+  } else if (result.status === 'error') {
+    content = (
+      <p className="status">Failed loading Pokemon data: {result.message}</p>
+    )
+  } else {
+    content = <Game allPokemon={result.data} />
   }
 
-  if (result.status === 'error') {
-    return <p>Failed loading Pokemon data: {result.message}</p>
-  }
-
-  return <Game allPokemon={result.data} />
+  return (
+    <div className="app">
+      <main className="game">{content}</main>
+    </div>
+  )
 }

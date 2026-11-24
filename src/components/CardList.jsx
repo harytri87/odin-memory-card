@@ -1,26 +1,40 @@
-function CardFace({ card }) {
-  return (
+function Card({ card, onPick }) {
+  const face = (
     <>
-      <img src={card.image} alt="" width={80} height={80} />
-      <span>{card.name}</span>
+      <img src={card.image} alt="" />
+      <span className="name">{card.name}</span>
     </>
+  )
+
+  return (
+    <li>
+      <div className="card">
+        {onPick ? (
+          <button
+            type="button"
+            className="front"
+            onClick={() => onPick(card.id)}
+          >
+            {face}
+          </button>
+        ) : (
+          <div className="front">{face}</div>
+        )}
+      </div>
+    </li>
   )
 }
 
 export default function CardList({ cards, onPick }) {
+  const variant = onPick ? 'hand' : 'pool'
+
   return (
-    <ul>
-      {cards.map((card) => (
-        <li key={card.id}>
-          {onPick ? (
-            <button type="button" onClick={() => onPick(card.id)}>
-              <CardFace card={card} />
-            </button>
-          ) : (
-            <CardFace card={card} />
-          )}
-        </li>
-      ))}
-    </ul>
+    <div className="card-list">
+      <ul className={variant}>
+        {cards.map((card) => (
+          <Card key={card.id} card={card} onPick={onPick} />
+        ))}
+      </ul>
+    </div>
   )
 }

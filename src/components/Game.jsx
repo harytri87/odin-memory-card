@@ -33,16 +33,17 @@ export default function Game({ allPokemon }) {
 
   return (
     <>
-      <p>
-        Score: {score} | Best: {game.bestScore}
+      <p className="scoreboard">
+        <span>Score: {score}</span>
+        <span>Best: {game.bestScore}</span>
       </p>
 
       {game.phase === 'ready' && (
         <>
-          <CardList cards={game.pool} />
-          <button type="button" onClick={handleStart}>
+          <button type="button" className="start" onClick={handleStart}>
             Start!
           </button>
+          <CardList cards={game.pool} />
         </>
       )}
 
