@@ -102,6 +102,7 @@ html {
     grid-template-columns: minmax(0, 1fr);
     transform-style: preserve-3d;
     rotate: y 0deg;
+    backface-visibility: hidden;
 
     &[inert] {
       rotate: y 180deg;
