@@ -93,7 +93,37 @@ html {
     padding: 0;
   }
 
-  & .front{
+  & li {
+    perspective: 80rem;
+  }
+
+  & .card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    transform-style: preserve-3d;
+    rotate: y 0deg;
+
+    &[inert] {
+      rotate: y 180deg;
+    }
+
+    @starting-style {
+      rotate: y 180deg;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition: rotate 0.4s ease-in-out;
+    }
+  }
+
+  & .front,
+  & .back {
+    grid-area: 1 / 1;
+    backface-visibility: hidden;
+  }
+
+  & .front {
+    position: relative;
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     justify-items: center;
@@ -101,6 +131,18 @@ html {
     gap: 0.25rem;
     width: 100%;
     text-align: center;
+  }
+
+  & .back {
+    display: grid;
+    place-content: center;
+    rotate: y 180deg;
+    border: 1px solid ButtonBorder;
+    background: url(./assets/International_Pokémon_logo.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-size: 1.5rem;
   }
 
   & img {
